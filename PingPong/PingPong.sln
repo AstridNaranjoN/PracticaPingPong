@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationServices", "ApplicationServices", "{D1880000-8888-4311-8B1D-E5C2E26A85C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{80FC12C8-5BD6-402C-A0E9-83AA9F932797}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructure", "Infraestructure", "{1F45964C-B158-4328-9D14-25933903EF7F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainServices", "DomainServices", "{AD7A7822-4DDE-4861-A4B9-2145B479EF84}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterface", "UserInterface", "{7ECEEAA7-7051-4E2A-80AA-60DDD55EB058}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingPong.Domain", "PingPong.Domain\PingPong.Domain.csproj", "{7155D909-80CB-40EA-BDB6-871C2D87C2BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingPong.DomainServices", "PingPong.DomainServices\PingPong.DomainServices.csproj", "{848C0349-A194-4C6E-8909-F87A7C2E5F0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingPong.Infraestructure", "PingPong.Infraestructure\PingPong.Infraestructure.csproj", "{7E024630-4B4F-413D-B96D-8D510AB41CE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingPong.ApplicationServices", "PingPong.ApplicationServices\PingPong.ApplicationServices.csproj", "{3F564048-0DF3-4466-941E-2F77C71A5E35}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RestApi", "RestApi", "{AE08AB1D-D332-4815-9172-82DDD9785660}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{C07FE1E1-E038-4FFC-9C0B-C0C592B191C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingPong.RestApi", "PingPong.RestApi\PingPong.RestApi.csproj", "{B560D11F-453A-473F-A338-93A1A239706D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7155D909-80CB-40EA-BDB6-871C2D87C2BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7155D909-80CB-40EA-BDB6-871C2D87C2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7155D909-80CB-40EA-BDB6-871C2D87C2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7155D909-80CB-40EA-BDB6-871C2D87C2BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{848C0349-A194-4C6E-8909-F87A7C2E5F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{848C0349-A194-4C6E-8909-F87A7C2E5F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{848C0349-A194-4C6E-8909-F87A7C2E5F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{848C0349-A194-4C6E-8909-F87A7C2E5F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E024630-4B4F-413D-B96D-8D510AB41CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E024630-4B4F-413D-B96D-8D510AB41CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E024630-4B4F-413D-B96D-8D510AB41CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E024630-4B4F-413D-B96D-8D510AB41CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F564048-0DF3-4466-941E-2F77C71A5E35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F564048-0DF3-4466-941E-2F77C71A5E35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F564048-0DF3-4466-941E-2F77C71A5E35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F564048-0DF3-4466-941E-2F77C71A5E35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B560D11F-453A-473F-A338-93A1A239706D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B560D11F-453A-473F-A338-93A1A239706D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B560D11F-453A-473F-A338-93A1A239706D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B560D11F-453A-473F-A338-93A1A239706D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7155D909-80CB-40EA-BDB6-871C2D87C2BC} = {80FC12C8-5BD6-402C-A0E9-83AA9F932797}
+		{848C0349-A194-4C6E-8909-F87A7C2E5F0E} = {AD7A7822-4DDE-4861-A4B9-2145B479EF84}
+		{7E024630-4B4F-413D-B96D-8D510AB41CE6} = {1F45964C-B158-4328-9D14-25933903EF7F}
+		{3F564048-0DF3-4466-941E-2F77C71A5E35} = {D1880000-8888-4311-8B1D-E5C2E26A85C6}
+		{AE08AB1D-D332-4815-9172-82DDD9785660} = {7ECEEAA7-7051-4E2A-80AA-60DDD55EB058}
+		{C07FE1E1-E038-4FFC-9C0B-C0C592B191C3} = {7ECEEAA7-7051-4E2A-80AA-60DDD55EB058}
+		{B560D11F-453A-473F-A338-93A1A239706D} = {AE08AB1D-D332-4815-9172-82DDD9785660}
+	EndGlobalSection
+EndGlobal
