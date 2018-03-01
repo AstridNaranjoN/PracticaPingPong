@@ -46,5 +46,11 @@
     <Compile Include="Pong\PongServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PingPong.Domain\PingPong.Domain.csproj">
+      <Project>{7155D909-80CB-40EA-BDB6-871C2D87C2BC}</Project>
+      <Name>PingPong.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

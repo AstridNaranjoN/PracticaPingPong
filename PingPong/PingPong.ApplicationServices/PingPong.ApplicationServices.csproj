@@ -40,7 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ping\IPingMessageService.cs" />
+    <Compile Include="Ping\PingMessageService.cs" />
+    <Compile Include="Pong\IPongMessageService.cs" />
+    <Compile Include="Pong\PongMessageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PingPong.DomainServices\PingPong.DomainServices.csproj">
+      <Project>{848C0349-A194-4C6E-8909-F87A7C2E5F0E}</Project>
+      <Name>PingPong.DomainServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PingPong.Infraestructure\PingPong.Infraestructure.csproj">
+      <Project>{7E024630-4B4F-413D-B96D-8D510AB41CE6}</Project>
+      <Name>PingPong.Infraestructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

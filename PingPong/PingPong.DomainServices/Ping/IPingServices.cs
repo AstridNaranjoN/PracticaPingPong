@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace PingPong.DomainServices.Ping
 {
-    interface IPingServices
+    public interface IPingServices
     {
+        EventHandler OnReceiveMessage  { get; set; }
+        void PingSendMessage();
     }
 }

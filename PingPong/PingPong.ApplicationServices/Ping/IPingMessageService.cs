@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PingPong.DomainServices.Pong
+namespace PingPong.ApplicationServices.Ping
 {
-    interface IPongServices
+    interface IPingMessageService
     {
-        void PongSendMessage();
+        void PingSendMessage();
     }
 }

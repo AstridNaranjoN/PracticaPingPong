@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace PingPong.Domain.Pong
 {
-    class PingMessage
+    public class PingMessage
     {
+        private String Message;
+
+        public PingMessage(String message)
+        {
+            Message = message;
+        }
     }
 }

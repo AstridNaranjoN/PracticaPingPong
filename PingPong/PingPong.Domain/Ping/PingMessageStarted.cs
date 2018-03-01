@@ -8,5 +8,12 @@ namespace PingPong.Domain.Ping
 {
     class PingMessageStarted
     {
+        public String Message { get; private set; }
+
+        public PingMessageStarted(String message)
+        {
+            Message = message;
+
+        }
     }
 }
