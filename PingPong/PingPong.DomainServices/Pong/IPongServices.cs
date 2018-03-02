@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PingPong.Domain.Contract;
+using PingPong.Domain.EventHandler;
+using System;
 
 namespace PingPong.DomainServices.Pong
 {
-    interface IPongServices
+    public interface IPongServices
     {
-        void PongSendMessage();
+        MessageEventHandler OnMessageStarted { get; set; }
+        void PongSendMessage(Guid id);
+        void PongMessageReceived(IMessage message);
+        string PongMeassures();
     }
 }

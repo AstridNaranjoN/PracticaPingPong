@@ -1,4 +1,5 @@
-﻿using PingPong.Domain.Pong;
+﻿using PingPong.Domain.Contract;
+using PingPong.Domain.Pong;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace PingPong.Domain.Repositories
 {
     public interface IPingRepository
     {
-        void Add(PingMessage message);
-        List<PingMessage> GetAll();
+        void Add(IMessage message);
+        List<IMessage> GetAll();
 
     }
 }

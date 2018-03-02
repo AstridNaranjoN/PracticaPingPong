@@ -1,22 +1,47 @@
-﻿using PingPong.Domain.Pong;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using PingPong.Domain.Contract;
+using PingPong.Domain.EventHandler;
+using PingPong.Domain.Pong;
+using PingPong.Domain.Repositories;
 using System.Threading.Tasks;
+using System;
 
 namespace PingPong.DomainServices.Pong
 {
-    class PongServices: IPongServices
+    public class PongServices: IPongServices
     {
-        public event EventHandler OnReceiveMessage;
+        private event MessageEventHandler _onMessageStarted;
 
-        public void PongSendMessage()
+        private IPingRepository pingRepository;
+
+        public MessageEventHandler OnMessageStarted
         {
-            if (OnReceiveMessage != null)
+            get { return _onMessageStarted; }
+            set { _onMessageStarted = value; }
+        }
+
+        public PongServices(IPingRepository ping)
+        {
+            pingRepository = ping;
+        }
+
+        public void PongSendMessage(Guid id)
+        {
+            if (_onMessageStarted != null)
             {
-                OnReceiveMessage(new PongMessage("PONG_MESSAGE"), null);
+                _onMessageStarted(new PongMessage("PONG_MESSAGE"), id.ToString());
             }
+        }
+
+        public async void PongMessageReceived(IMessage message)
+        {
+            pingRepository.Add(message);
+            await Task.Delay(2000);
+            PongSendMessage(message.Id);
+        }
+
+        public string PongMeassures()
+        {
+            return pingRepository.GetAll().Count.ToString();
         }
     }
 }

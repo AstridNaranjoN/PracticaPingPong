@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PingPong.ApplicationServices.Ping
+namespace PingPong.Domain.Contract
 {
-    public interface IPingMessageService
+    public interface IMessage
     {
-        Task PingSendMessage();
+        Guid Id { get; set; }
+        String Message { get; set; }
     }
 }

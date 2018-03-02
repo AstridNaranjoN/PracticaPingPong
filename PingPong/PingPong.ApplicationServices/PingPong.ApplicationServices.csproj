@@ -45,11 +45,16 @@
     <Compile Include="Pong\IPongMessageService.cs" />
     <Compile Include="Pong\PongMessageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\RegisterTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PingPong.DomainServices\PingPong.DomainServices.csproj">
       <Project>{848C0349-A194-4C6E-8909-F87A7C2E5F0E}</Project>
       <Name>PingPong.DomainServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PingPong.Domain\PingPong.Domain.csproj">
+      <Project>{7155D909-80CB-40EA-BDB6-871C2D87C2BC}</Project>
+      <Name>PingPong.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\PingPong.Infraestructure\PingPong.Infraestructure.csproj">
       <Project>{7E024630-4B4F-413D-B96D-8D510AB41CE6}</Project>

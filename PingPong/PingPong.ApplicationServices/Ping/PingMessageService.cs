@@ -1,4 +1,5 @@
-﻿using PingPong.DomainServices.Ping;
+﻿using PingPong.Domain.EventHandler;
+using PingPong.DomainServices.Ping;
 using PingPong.Infraestructure.MessageBroker;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,20 @@ namespace PingPong.ApplicationServices.Ping
     class PingMessageService : IPingMessageService
     {
         IPingServices domainService;
-        public PingMessageService(IPingServices service)
+        ICommunicationHandler communicationHandler;
+        public PingMessageService(IPingServices service, ICommunicationHandler communication)
         {
             domainService = service;
+            communicationHandler = communication;
+            domainService.OnMessageStarted += new MessageEventHandler(communicationHandler.SendMessage);
+            communicationHandler.OnMessageArrived += new MessageArriveHandler(domainService.PingMessageReceived);
         }
 
-        public void PingSendMessage()
+        public async Task PingSendMessage()
         {
-            domainService.PingSendMessage();
-            domainService.OnReceiveMessage += new EventHandler(Send.SendMessage);
+            Guid id = domainService.PingSendMessage();
+            communicationHandler.ReceiveMessage(id.ToString());
+            await domainService.WaitReply();
         }
     }
 }

@@ -1,28 +1,46 @@
-﻿using PingPong.Domain.Pong;
+﻿using PingPong.Domain.Contract;
+using PingPong.Domain.EventHandler;
+using PingPong.Domain.Pong;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PingPong.DomainServices.Ping
 {
-    class PingServices : IPingServices
+    public class PingServices : IPingServices
     {
-        private event EventHandler _onReceiveMessage;
+        private event MessageEventHandler _onMessageStarted;
 
-        public EventHandler OnReceiveMessage
+        public MessageEventHandler OnMessageStarted
         {
-            get { return _onReceiveMessage; }
-            set { _onReceiveMessage = value; }
+            get { return _onMessageStarted; }
+            set { _onMessageStarted = value; }
         }
 
-        public void PingSendMessage()
+        public Guid PingSendMessage()
         {
-            if (_onReceiveMessage != null)
+            if (_onMessageStarted != null)
             {
-                _onReceiveMessage(new PingMessage("PING_MESSAGE"), null);
+                PingMessage message = new PingMessage("PING_MESSAGE");
+                _onMessageStarted(message, "pingpongQueue");
+                return message.Id;
             }
+
+            return new Guid();
+        }
+
+        private static string replyMessage = string.Empty;
+        public void PingMessageReceived(IMessage message)
+        {
+            replyMessage = message.Message;
+        }
+
+        public async Task WaitReply()
+        {
+            while (replyMessage == string.Empty)
+            {
+                await Task.Delay(500);
+            }
+            replyMessage = string.Empty;
         }
     }
 }

@@ -5,19 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PingPong.Domain.Pong;
+using PingPong.Domain.Contract;
 
 namespace PingPong.Infraestructure.Repositories
 {
-    class PingRepository : IPingRepository
+    public class PingRepository : IPingRepository
     {
-        private List<PingMessage> _repository = new List<PingMessage>();
+        private List<IMessage> _repository = new List<IMessage>();
 
-        public void Add(PingMessage message)
+        public void Add(IMessage message)
         {
             _repository.Add(message);
         }
 
-        public List<PingMessage> GetAll()
+        public List<IMessage> GetAll()
         {
             return _repository;
         }

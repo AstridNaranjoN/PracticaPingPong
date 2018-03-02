@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace PingPong.ApplicationServices.Pong
 {
-    interface IPongMessageService
+    public interface IPongMessageService
     {
+        string PongMeassures();
     }
 }
