@@ -1,17 +1,12 @@
-﻿using PingPong.Domain.Contract;
-using PingPong.Domain.EventHandler;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PingPong.Domain.EventHandler;
+using PingPong.Domain.Pong;
 
 namespace PingPong.Infraestructure.MessageBroker
 {
     public interface ICommunicationHandler
     {
         MessageArriveHandler OnMessageArrived { get; set; }
-        void SendMessage(IMessage message, string queue);
+        void SendMessage(PingPongMessage message, string queue);
         void ReceiveMessage(string queue);
     }
 }

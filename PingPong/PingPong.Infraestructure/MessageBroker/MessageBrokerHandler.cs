@@ -1,10 +1,9 @@
-﻿using PingPong.Domain.Contract;
-using PingPong.Domain.EventHandler;
+﻿using PingPong.Domain.EventHandler;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Newtonsoft.Json;
 using System.Text;
-using System;
+using PingPong.Domain.Pong;
 
 namespace PingPong.Infraestructure.MessageBroker
 {
@@ -16,7 +15,6 @@ namespace PingPong.Infraestructure.MessageBroker
         static EventingBasicConsumer consumer;
 
         private event MessageArriveHandler _onMessageArrived;
-
         public MessageArriveHandler OnMessageArrived
         {
             get { return _onMessageArrived; }
@@ -30,7 +28,7 @@ namespace PingPong.Infraestructure.MessageBroker
             channel = connection.CreateModel();
         }
 
-        public void SendMessage(IMessage message, string queue)
+        public void SendMessage(PingPongMessage message, string queue)
         {
             using (var channel = connection.CreateModel())
             {
@@ -48,10 +46,7 @@ namespace PingPong.Infraestructure.MessageBroker
                                      body: body);
             }
         }
-
-
-
-
+        
         public void ReceiveMessage(string queue)
         {
             channel.QueueDeclare(queue: queue,
@@ -67,7 +62,7 @@ namespace PingPong.Infraestructure.MessageBroker
                 var message = Encoding.UTF8.GetString(body);
                 if (OnMessageArrived != null)
                 {
-                    OnMessageArrived(JsonConvert.DeserializeObject<Domain.Pong.PingMessage>(message));
+                    OnMessageArrived(JsonConvert.DeserializeObject<Domain.Pong.PingPongMessage>(message));
                 }
 
             };

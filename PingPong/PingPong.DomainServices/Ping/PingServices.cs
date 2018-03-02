@@ -1,5 +1,4 @@
-﻿using PingPong.Domain.Contract;
-using PingPong.Domain.EventHandler;
+﻿using PingPong.Domain.EventHandler;
 using PingPong.Domain.Pong;
 using System;
 using System.Threading.Tasks;
@@ -9,7 +8,6 @@ namespace PingPong.DomainServices.Ping
     public class PingServices : IPingServices
     {
         private event MessageEventHandler _onMessageStarted;
-
         public MessageEventHandler OnMessageStarted
         {
             get { return _onMessageStarted; }
@@ -20,7 +18,7 @@ namespace PingPong.DomainServices.Ping
         {
             if (_onMessageStarted != null)
             {
-                PingMessage message = new PingMessage("PING_MESSAGE");
+                PingPongMessage message = new PingPongMessage("PING_MESSAGE");
                 _onMessageStarted(message, "pingpongQueue");
                 return message.Id;
             }
@@ -28,12 +26,13 @@ namespace PingPong.DomainServices.Ping
             return new Guid();
         }
 
-        private static string replyMessage = string.Empty;
-        public void PingMessageReceived(IMessage message)
+        public void PingMessageReceived(PingPongMessage message)
         {
             replyMessage = message.Message;
         }
 
+
+        private static string replyMessage = string.Empty;
         public async Task WaitReply()
         {
             while (replyMessage == string.Empty)

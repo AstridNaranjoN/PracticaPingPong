@@ -1,5 +1,5 @@
-﻿using PingPong.Domain.Contract;
-using PingPong.Domain.EventHandler;
+﻿using PingPong.Domain.EventHandler;
+using PingPong.Domain.Pong;
 using System;
 
 namespace PingPong.DomainServices.Pong
@@ -8,7 +8,7 @@ namespace PingPong.DomainServices.Pong
     {
         MessageEventHandler OnMessageStarted { get; set; }
         void PongSendMessage(Guid id);
-        void PongMessageReceived(IMessage message);
+        void PongMessageReceived(PingPongMessage message);
         string PongMeassures();
     }
 }

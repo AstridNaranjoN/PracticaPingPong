@@ -1,5 +1,4 @@
-﻿using PingPong.Domain.Contract;
-using PingPong.Domain.EventHandler;
+﻿using PingPong.Domain.EventHandler;
 using PingPong.Domain.Pong;
 using PingPong.Domain.Repositories;
 using System.Threading.Tasks;
@@ -28,11 +27,11 @@ namespace PingPong.DomainServices.Pong
         {
             if (_onMessageStarted != null)
             {
-                _onMessageStarted(new PongMessage("PONG_MESSAGE"), id.ToString());
+                _onMessageStarted(new PingPongMessage("PONG_MESSAGE"), id.ToString());
             }
         }
 
-        public async void PongMessageReceived(IMessage message)
+        public async void PongMessageReceived(PingPongMessage message)
         {
             pingRepository.Add(message);
             await Task.Delay(2000);

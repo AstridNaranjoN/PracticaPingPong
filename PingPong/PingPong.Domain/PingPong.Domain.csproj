@@ -40,12 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contract\IMessage.cs" />
     <Compile Include="EventHandler\EventHandlers.cs" />
-    <Compile Include="Ping\PingMessageStarted.cs" />
-    <Compile Include="Pong\PingMessage.cs" />
-    <Compile Include="Pong\PongMessage.cs" />
-    <Compile Include="Pong\PongMessageStarted.cs" />
+    <Compile Include="PingPong\PingPongMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IPingRepository.cs" />
     <Compile Include="Repositories\IPongRepository.cs" />

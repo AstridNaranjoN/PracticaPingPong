@@ -76,8 +76,6 @@
     <Compile Include="Dependencies\DependencyFactory.cs" />
     <Compile Include="MessageBroker\ICommunicationHandler.cs" />
     <Compile Include="MessageBroker\MessageBrokerHandler.cs" />
-    <Compile Include="MessageBroker\Received.cs" />
-    <Compile Include="MessageBroker\Send.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\PingRepository.cs" />
     <Compile Include="Repositories\PongRepository.cs" />

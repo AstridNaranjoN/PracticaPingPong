@@ -1,24 +1,19 @@
 ﻿using PingPong.Domain.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PingPong.Domain.Pong;
-using PingPong.Domain.Contract;
 
 namespace PingPong.Infraestructure.Repositories
 {
     public class PongRepository : IPongRepository
     {
-        private List<IMessage> _repository = new List<IMessage>();
+        private List<PingPongMessage> _repository = new List<PingPongMessage>();
 
-        public void Add(IMessage message)
+        public void Add(PingPongMessage message)
         {
             _repository.Add(message);
         }
 
-        public List<IMessage> GetAll()
+        public List<PingPongMessage> GetAll()
         {
             return _repository;
         }

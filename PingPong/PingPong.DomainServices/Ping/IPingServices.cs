@@ -1,5 +1,5 @@
-﻿using PingPong.Domain.Contract;
-using PingPong.Domain.EventHandler;
+﻿using PingPong.Domain.EventHandler;
+using PingPong.Domain.Pong;
 using System;
 using System.Threading.Tasks;
 
@@ -9,7 +9,7 @@ namespace PingPong.DomainServices.Ping
     {
         MessageEventHandler OnMessageStarted  { get; set; }
         Guid PingSendMessage();
-        void PingMessageReceived(IMessage message);
+        void PingMessageReceived(PingPongMessage message);
         Task WaitReply();
     }
 }
