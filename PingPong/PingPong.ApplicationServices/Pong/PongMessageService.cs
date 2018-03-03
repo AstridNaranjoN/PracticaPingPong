@@ -1,4 +1,5 @@
 ﻿using PingPong.Domain.EventHandler;
+using PingPong.Domain.PingPong;
 using PingPong.DomainServices.Ping;
 using PingPong.DomainServices.Pong;
 using PingPong.Infraestructure.MessageBroker;
@@ -24,7 +25,7 @@ namespace PingPong.ApplicationServices.Pong
             communicationHandler.ReceiveMessage("pingpongQueue");
         }
 
-        public string PongMeassures()
+        public PingPongMeasure PongMeassures()
         {
             return domainService.PongMeassures();
         }

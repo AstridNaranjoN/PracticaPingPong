@@ -3,14 +3,16 @@ using PingPong.Domain.Pong;
 using PingPong.Domain.Repositories;
 using System.Threading.Tasks;
 using System;
+using PingPong.Domain.PingPong;
+using Newtonsoft.Json;
 
 namespace PingPong.DomainServices.Pong
 {
-    public class PongServices: IPongServices
+    public class PongServices : IPongServices
     {
         private event MessageEventHandler _onMessageStarted;
 
-        private IPingRepository pingRepository;
+        private IUnitOfWork _unitOfWork;
 
         public MessageEventHandler OnMessageStarted
         {
@@ -18,29 +20,32 @@ namespace PingPong.DomainServices.Pong
             set { _onMessageStarted = value; }
         }
 
-        public PongServices(IPingRepository ping)
+        public PongServices(IUnitOfWork unitOfWork)
         {
-            pingRepository = ping;
+            _unitOfWork = unitOfWork;
         }
 
         public void PongSendMessage(Guid id)
         {
             if (_onMessageStarted != null)
             {
-                _onMessageStarted(new PingPongMessage("PONG_MESSAGE"), id.ToString());
+                var message = new PingPongMessage("PONG_MESSAGE");
+                _onMessageStarted(message, id.ToString());
+                _unitOfWork.PongRepository.Add(message);
             }
         }
 
         public async void PongMessageReceived(PingPongMessage message)
         {
-            pingRepository.Add(message);
+            _unitOfWork.PingRepository.Add(message);
             await Task.Delay(2000);
             PongSendMessage(message.Id);
+
         }
 
-        public string PongMeassures()
+        public PingPongMeasure PongMeassures()
         {
-            return pingRepository.GetAll().Count.ToString();
+            return new PingPongMeasure(_unitOfWork.PingRepository.GetAll().Count, _unitOfWork.PongRepository.GetAll().Count);
         }
     }
 }

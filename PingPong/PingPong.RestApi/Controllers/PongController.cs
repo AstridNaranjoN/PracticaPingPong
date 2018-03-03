@@ -1,4 +1,5 @@
 ﻿using PingPong.ApplicationServices.Pong;
+using PingPong.Domain.PingPong;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace PingPong.RestApi.Controllers
             this.service = service;
         }
 
-        public string Get()
+        public PingPongMeasure Get()
         {
             return service.PongMeassures();
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PingPong.Domain.PingPong;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace PingPong.ApplicationServices.Pong
 {
     public interface IPongMessageService
     {
-        string PongMeassures();
+        PingPongMeasure PongMeassures();
     }
 }

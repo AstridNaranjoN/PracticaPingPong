@@ -34,6 +34,7 @@ namespace PingPong.ApplicationServices.Utils
         {
             DependencyFactory.RegisterType<IPingServices, PingServices>();
             DependencyFactory.RegisterType<IPongServices, PongServices>();
+            DependencyFactory.RegisterType<IUnitOfWork, UnitOfWork>();
         }
 
         private static void RegisterApplicationServices()
@@ -42,7 +43,7 @@ namespace PingPong.ApplicationServices.Utils
             //DependencyFactory.RegisterType<IPongMessageService, PongMessageService>();
             ICommunicationHandler comm = new MessageBrokerHandler();
             comm.ReceiveMessage("pingpongQueue");
-            IPongMessageService servicePong = new PongMessageService(new PongServices(new PingRepository()), comm);
+            IPongMessageService servicePong = new PongMessageService(new PongServices(new UnitOfWork (new PingRepository(), new PongRepository())), comm);
             DependencyFactory.RegisterInstance<IPongMessageService>(servicePong);
 
 
