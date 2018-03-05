@@ -38,6 +38,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ping\IPingMessageService.cs" />

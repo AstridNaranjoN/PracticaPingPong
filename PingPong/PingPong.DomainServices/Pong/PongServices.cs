@@ -4,7 +4,6 @@ using PingPong.Domain.Repositories;
 using System.Threading.Tasks;
 using System;
 using PingPong.Domain.PingPong;
-using Newtonsoft.Json;
 
 namespace PingPong.DomainServices.Pong
 {

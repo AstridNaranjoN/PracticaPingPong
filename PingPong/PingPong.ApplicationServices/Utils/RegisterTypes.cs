@@ -6,11 +6,6 @@ using PingPong.DomainServices.Pong;
 using PingPong.Infraestructure.Dependencies;
 using PingPong.Infraestructure.MessageBroker;
 using PingPong.Infraestructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PingPong.ApplicationServices.Utils
 {
@@ -20,33 +15,33 @@ namespace PingPong.ApplicationServices.Utils
         {
             RegisterEntityRepositories();
             RegisterDomainServices();
-            RegisterApplicationServices();
             RegisterInfraestructureService();
+            //RegisterApplicationServices();
         }
 
         private static void RegisterEntityRepositories()
         {
             DependencyFactory.RegisterType<IPingRepository, PingRepository>();
             DependencyFactory.RegisterType<IPongRepository, PongRepository>();
+            DependencyFactory.RegisterType<IUnitOfWork, UnitOfWork>();
         }
 
         private static void RegisterDomainServices()
         {
             DependencyFactory.RegisterType<IPingServices, PingServices>();
             DependencyFactory.RegisterType<IPongServices, PongServices>();
-            DependencyFactory.RegisterType<IUnitOfWork, UnitOfWork>();
         }
 
-        private static void RegisterApplicationServices()
+        public static void RegisterPingApplicationServices()
         {
             DependencyFactory.RegisterType<IPingMessageService, PingMessageService>();
-            //DependencyFactory.RegisterType<IPongMessageService, PongMessageService>();
-            ICommunicationHandler comm = new MessageBrokerHandler();
-            comm.ReceiveMessage("pingpongQueue");
-            IPongMessageService servicePong = new PongMessageService(new PongServices(new UnitOfWork (new PingRepository(), new PongRepository())), comm);
-            DependencyFactory.RegisterInstance<IPongMessageService>(servicePong);
+        }
 
-
+        public static void RegisterPongApplicationServices()
+        {
+            DependencyFactory.RegisterType<IPongMessageService, PongMessageService>();
+            var service = DependencyFactory.Container.Resolve(typeof(PongMessageService), "PongMessageService");
+            DependencyFactory.RegisterInstance<IPongMessageService>((IPongMessageService)service);
         }
 
         private static void RegisterInfraestructureService()

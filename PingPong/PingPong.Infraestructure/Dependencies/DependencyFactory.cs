@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity;
+﻿using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
 
@@ -64,26 +59,6 @@ namespace PingPong.Infraestructure.Dependencies
         public static void RegisterType<InterfaceType, ClassType>() where ClassType : InterfaceType
         {
             Container.RegisterType<InterfaceType, ClassType>();
-        }
-
-        public static void RegisterTypeWithOneParameterConstructor<InterfaceType, ClassType>(string constructorParameterValue) where ClassType : InterfaceType
-        {
-            Container.RegisterType<InterfaceType, ClassType>(new InjectionConstructor(constructorParameterValue));
-        }
-
-        public static void RegisterTypeWithOneParameterConstructorHierarchicalLifetimeManager<InterfaceType, ClassType>(string constructorParameterValue) where ClassType : InterfaceType
-        {
-            Container.RegisterType<InterfaceType, ClassType>(new HierarchicalLifetimeManager(), new InjectionConstructor(constructorParameterValue));
-        }
-
-        public static void RegisterTypeWithTwoParameterConstructor<InterfaceType, ClassType, AdditionalParameterType>(string constructorParameterValue) where ClassType : InterfaceType
-        {
-            Container.RegisterType<InterfaceType, ClassType>(new InjectionConstructor(constructorParameterValue, Resolve<AdditionalParameterType>()));
-        }
-
-        public static void RegisterTypeWithConstructor<InterfaceType, ClassType>(InjectionConstructor constructorInjection) where ClassType : InterfaceType
-        {
-            Container.RegisterType<InterfaceType, ClassType>(constructorInjection);
         }
     }
 }

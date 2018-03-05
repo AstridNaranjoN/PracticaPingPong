@@ -1,9 +1,9 @@
 ﻿using PingPong.Domain.EventHandler;
+using PingPong.Domain.Pong;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Newtonsoft.Json;
 using System.Text;
-using PingPong.Domain.Pong;
 
 namespace PingPong.Infraestructure.MessageBroker
 {
@@ -25,35 +25,35 @@ namespace PingPong.Infraestructure.MessageBroker
         {
             factory = new ConnectionFactory() { HostName = "localhost" };
             connection = factory.CreateConnection();
-            channel = connection.CreateModel();
+            if (channel == null)
+            {
+                channel = connection.CreateModel();
+            }
         }
 
         public void SendMessage(PingPongMessage message, string queue)
-        {
-            using (var channel = connection.CreateModel())
-            {
-                channel.QueueDeclare(queue: queue,
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
-
-                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
-
-                channel.BasicPublish(exchange: "",
-                                     routingKey: queue,
-                                     basicProperties: null,
-                                     body: body);
-            }
-        }
-        
-        public void ReceiveMessage(string queue)
         {
             channel.QueueDeclare(queue: queue,
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
                                  arguments: null);
+
+            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+
+            channel.BasicPublish(exchange: "",
+                                 routingKey: queue,
+                                 basicProperties: null,
+                                 body: body);
+        }
+
+        public void ReceiveMessage(string queue)
+        {
+            channel.QueueDeclare(queue: queue,
+                             durable: false,
+                             exclusive: false,
+                             autoDelete: false,
+                             arguments: null);
 
             consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, ea) =>
@@ -62,7 +62,7 @@ namespace PingPong.Infraestructure.MessageBroker
                 var message = Encoding.UTF8.GetString(body);
                 if (OnMessageArrived != null)
                 {
-                    OnMessageArrived(JsonConvert.DeserializeObject<Domain.Pong.PingPongMessage>(message));
+                    OnMessageArrived(JsonConvert.DeserializeObject<PingPongMessage>(message));
                 }
 
             };

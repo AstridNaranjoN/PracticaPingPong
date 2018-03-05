@@ -7,20 +7,21 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace PingPong.RestApi.Controllers
+namespace PingPong.RestApi.Pong.Controllers
 {
     public class PongController : ApiController
     {
-        IPongMessageService service;
+        IPongMessageService pongMessageService;
 
-        public PongController(IPongMessageService service)
+        public PongController(IPongMessageService pongmessage)
         {
-            this.service = service;
+            pongMessageService = pongmessage;
+
         }
 
         public PingPongMeasure Get()
         {
-            return service.PongMeassures();
+            return pongMessageService.PongMeassures();
         }
     }
 }
