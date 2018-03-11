@@ -33,42 +33,48 @@ namespace PingPong.Infraestructure.MessageBroker
 
         public void SendMessage(PingPongMessage message, string queue)
         {
-            channel.QueueDeclare(queue: queue,
-                                 durable: false,
-                                 exclusive: false,
-                                 autoDelete: false,
-                                 arguments: null);
+            lock (channel)
+            {
+                channel.QueueDeclare(queue: queue,
+                                         durable: false,
+                                         exclusive: false,
+                                         autoDelete: false,
+                                         arguments: null);
 
-            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
-            channel.BasicPublish(exchange: "",
-                                 routingKey: queue,
-                                 basicProperties: null,
-                                 body: body);
+                channel.BasicPublish(exchange: "",
+                                     routingKey: queue,
+                                     basicProperties: null,
+                                     body: body); 
+            }
         }
 
         public void ReceiveMessage(string queue)
         {
-            channel.QueueDeclare(queue: queue,
-                             durable: false,
-                             exclusive: false,
-                             autoDelete: false,
-                             arguments: null);
-
-            consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) =>
+            lock (channel)
             {
-                var body = ea.Body;
-                var message = Encoding.UTF8.GetString(body);
-                if (OnMessageArrived != null)
-                {
-                    OnMessageArrived(JsonConvert.DeserializeObject<PingPongMessage>(message));
-                }
+                channel.QueueDeclare(queue: queue,
+                                     durable: false,
+                                     exclusive: false,
+                                     autoDelete: false,
+                                     arguments: null);
 
-            };
-            channel.BasicConsume(queue: queue,
-                                 autoAck: true,
-                                 consumer: consumer);
+                consumer = new EventingBasicConsumer(channel);
+                consumer.Received += (model, ea) =>
+                {
+                    var body = ea.Body;
+                    var message = Encoding.UTF8.GetString(body);
+                    if (OnMessageArrived != null)
+                    {
+                        OnMessageArrived(JsonConvert.DeserializeObject<PingPongMessage>(message));
+                    }
+
+                };
+                channel.BasicConsume(queue: queue,
+                                     autoAck: true,
+                                     consumer: consumer); 
+            }
         }
     }
 }

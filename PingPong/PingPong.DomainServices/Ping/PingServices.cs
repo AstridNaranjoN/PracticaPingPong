@@ -32,7 +32,7 @@ namespace PingPong.DomainServices.Ping
         }
 
 
-        private static string replyMessage = string.Empty;
+        private string replyMessage = string.Empty;
         public async Task WaitReply()
         {
             while (replyMessage == string.Empty)
