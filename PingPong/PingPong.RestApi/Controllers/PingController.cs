@@ -13,9 +13,9 @@ namespace PingPong.RestApi.Controllers
             this.service = service;
         }
 
-        public async Task Get()
+        public void Get()
         {
-            await service.PingSendMessage();
+            service.PingSendMessage();
         }
     }
 }
